@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type= "text/css" rel="stylesheet" href="css/style.css" media="all">
+    <script type="application/javascript" src="js/scpirt.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="page_header">DEMO</h1>
+    <p>текст</p>
+    <p>текст2</p>
+    <p>текст3</p>
+
+    <div class="btn_block">
+        <input type="button" value="Минимум" id="btn_min" class="btn" onclick="f_paint_min_cells();">
+        <input type="button" value="Максимум" id="btn_max" class="btn" onclick="f_paint_max_cells();">
+    </div>
+    
+    <table id="tbl_main" border="1" cellpadding="0">
+        <tr>
+            <th>№</th>
+            <th>Мороженное</th>
+            <th>Январь</th>
+            <th>Февраяь</th>
+            <th>Март</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Пломбир</td>
+            <td>12</td>
+            <td>1</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Вафельный</td>
+            <td>12</td>
+            <td>5</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Морозко</td>
+            <td>7</td>
+            <td>1</td>
+            <td>12</td>
+        </tr>
+    </table>
+
+    <div id="result"></div>
+    <div class="btn_block">
+        <input type="button" value="ИТОГО" id="btn_max" class="btn" onclick="f_summ();">
+    </div>
+</body>
+</html>

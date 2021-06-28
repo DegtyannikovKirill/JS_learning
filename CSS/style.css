@@ -1,0 +1,17 @@
+body{
+    padding: 24px;
+    font-family: Arial;
+}
+.btn{
+    height: 50px;
+    width: 150px;
+}
+
+#btn_cancel{
+    background-color: blueviolet;
+}
+
+.btn_block{
+    padding: 24px;
+    padding-left: 0;
+}
