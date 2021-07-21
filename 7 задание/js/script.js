@@ -4,7 +4,7 @@ function f_start (){
 	let filter_inp = document.getElementById("filter_inp");
 	filter_inp.addEventListener("input", function(e){
 		// регулярка
-		let pattern = new RegExp(this.value, "ig");
+		let pattern = new RegExp(this.value, "i");
 		let tmp_val;
 		let tmp_id = 0;
 
@@ -101,13 +101,7 @@ function f_print_table(arr_rows){
 		tbl_body += '</tr>'
 	}
 	
-	t1.innerHTML = '<thead>'+tbl_haeder+'</thead><tbody>'+tbl_body+'</tbody>';
-	
-	//console.dir(t1);
-	
-	console.log(tbl_haeder);
-	
-	
+	t1.innerHTML = '<thead>'+tbl_haeder+'</thead><tbody>'+tbl_body+'</tbody>';	
 }
 
 

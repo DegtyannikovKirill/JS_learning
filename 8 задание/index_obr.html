@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="application/javascript">
+        // чтобы не обращаться каждый раз, будем работать чреез глобальную переменную
+        var obj;
+
+        function f_print_tbl(j_obj){
+            // соберем таблицу
+            let tbl_haeder = ''
+	          , tbl_body = '';
+            // собираем шапку
+            tbl_haeder  +=  '<tr>'+
+                                '<th>ID</th>'+
+                                '<th>Наименование</th>'+
+                                '<th>Код валюты</th>'+
+                                '<th>Кодовое обозначение</th>'+
+                                '<th>Наминал</th>'+
+                                '<th>Текущее значение</th>'+
+                                '<th>Предыдущее значение</th>'+
+                            '</tr>'
+            // собираем тело таблицы
+            let filter = document.getElementById('filter_inp').value;
+
+            for(var k in j_obj.Valute){
+                if(k.startsWith(filter)){
+                    tbl_body += '<tr>'+
+                                    '<td>'+j_obj.Valute[k].ID+'</td>'+
+                                    '<td>'+j_obj.Valute[k].Name+'</td>'+
+                                    '<td>'+j_obj.Valute[k].NumCode+'</td>'+
+                                    '<td>'+j_obj.Valute[k].CharCode+'</td>'+
+                                    '<td>'+j_obj.Valute[k].Nominal+'</td>'+
+                                    '<td>'+j_obj.Valute[k].Value+'</td>'+
+                                    '<td>'+j_obj.Valute[k].Previous+'</td>'+
+                                '</tr>'
+                }
+            }
+            let t1 = document.getElementById('t1');
+            t1.innerHTML = '<thead>'+tbl_haeder+'</thead><tbody>'+tbl_body+'</tbody>';
+        }
+
+        window.addEventListener("load", function(){
+            
+            document.getElementById('filter_inp').addEventListener("input", function(e){
+                f_print_tbl(obj);
+            });
+            let obr = new XMLHttpRequest();
+            // console.dir(obr);
+
+            obr.open("GET", "https://www.cbr-xml-daily.ru/daily_json.js");
+            obr.onload = function(){
+                console.log("Вроде загрузили!");
+                
+                obj = JSON.parse(this.responseText);
+                // соберем дату
+                let timestamp_str = obj.Timestamp;
+                // костыльно, но как то так) парсим строку с датой и временем
+                let date_array = timestamp_str.split('T')[0].split('-');
+                let time_array = timestamp_str.split('T')[1].split('+');
+                document.getElementById('date_val').innerHTML += date_array[2] +'.'+ date_array[1] +'.'+ date_array[0] + ' ' + time_array[0];
+                // рисуем таблицу
+                f_print_tbl(obj);
+            }
+            obr.send();
+        })
+    </script>
+
+
+</head>
+<body>
+    <h1>Работа с объектом XMLHttpRequest</h1>
+    <div>
+        <span>Фильтрация (начинается с )</span>
+        <input type="text" id="filter_inp" value="T">
+        <br/>
+        <span id="date_val">Данные актуальны на: </span>
+    </div>
+    <table  border="1" cellpadding="10" cellspacing="0" id="t1"></table>
+</body>
+</html>
